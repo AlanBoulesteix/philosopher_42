@@ -6,7 +6,7 @@
 /*   By: aboulest <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 16:13:11 by aboulest          #+#    #+#             */
-/*   Updated: 2023/03/30 10:08:49 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/04/11 15:14:15 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <unistd.h>
 # include <sys/time.h>
 # include <pthread.h>
+# include <stdbool.h> 
 
 typedef struct s_table 
 {
@@ -57,4 +58,6 @@ pthread_mutex_t	*init_fork(t_table *table);
 void	printf_mutex(t_philo *philo, char *str);
 void	eating_even_side(t_philo *philo);
 void	eating_odd_side(t_philo *philo);
+void	sleeping(t_philo *philo);
+bool	check_dead(t_philo *philo);
 #endif

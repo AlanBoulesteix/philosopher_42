@@ -6,7 +6,7 @@
 /*   By: aboulest <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 16:35:07 by aboulest          #+#    #+#             */
-/*   Updated: 2023/03/27 15:10:59 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/04/07 11:21:33 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ t_table *init_struct(char **argv)
 	table->sleep_t = ft_atoi(argv[4]);
 	if (argv[5])
 		table->nb_eat_t = ft_atoi(argv[5]);
+	else
+		table->nb_eat_t = -1;
 	table->dead = 0;
 	pthread_mutex_init(&table->system_call, NULL);
 	pthread_mutex_init(&table->check_dead, NULL);

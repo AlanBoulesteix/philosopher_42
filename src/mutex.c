@@ -6,7 +6,7 @@
 /*   By: aboulest <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 11:29:28 by aboulest          #+#    #+#             */
-/*   Updated: 2023/03/29 12:03:32 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/04/11 15:14:28 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,22 @@ void	printf_mutex(t_philo *philo, char *str)
 	struct timeval	tv;
 	long			time;
 	long			time_start;
-	
+
 	pthread_mutex_lock(&philo->table->system_call);
 	gettimeofday(&tv, NULL);
-	time_start = philo->table->tv.tv_sec * 1000000 + philo->table->tv.tv_usec;	
-	time = tv.tv_sec * 1000000 + tv.tv_usec;
+	time_start = (philo->table->tv.tv_sec * 1000000 + philo->table->tv.tv_usec) /100;	
+	time = (tv.tv_sec * 1000000 + tv.tv_usec) / 100; 
 	printf("%ld ",time - time_start);
 	printf("%d", philo->num);
 	printf(" %s", str);
 	pthread_mutex_unlock(&philo->table->system_call);
+}
+
+bool	check_dead(t_philo *philo)
+{
+	int	dead;
+	pthread_mutex_lock(&philo->table->check_dead);
+	dead = philo->table->dead;
+	pthread_mutex_unlock(&philo->table->check_dead);
+	return (dead == 1);
 }
