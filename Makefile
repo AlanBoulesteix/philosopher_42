@@ -6,7 +6,7 @@
 #    By: aboulest <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/16 16:06:10 by aboulest          #+#    #+#              #
-#    Updated: 2023/03/29 11:58:28 by aboulest         ###   ########.fr        #
+#    Updated: 2023/04/13 11:46:58 by aboulest         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,10 +15,11 @@ NAME		= philo
 FILES		= main.c\
 			  parsing.c\
 			  philo.c\
-			  lst_utilities.c\
-			  fork.c\
+			  error.c\
+			  fork_and_philo.c\
 			  mutex.c\
-			  action.c
+			  action.c\
+			  utilities.c
 
 SRC_DIR		= src/
 

@@ -6,7 +6,7 @@
 /*   By: aboulest <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 11:29:28 by aboulest          #+#    #+#             */
-/*   Updated: 2023/04/11 15:14:28 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/04/13 11:22:50 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,12 @@
 
 void	printf_mutex(t_philo *philo, char *str)
 {
-	struct timeval	tv;
 	long			time;
 	long			time_start;
 
 	pthread_mutex_lock(&philo->table->system_call);
-	gettimeofday(&tv, NULL);
-	time_start = (philo->table->tv.tv_sec * 1000000 + philo->table->tv.tv_usec) /100;	
-	time = (tv.tv_sec * 1000000 + tv.tv_usec) / 100; 
+	time_start = philo->table->time_start;
+	time = get_time();
 	printf("%ld ",time - time_start);
 	printf("%d", philo->num);
 	printf(" %s", str);

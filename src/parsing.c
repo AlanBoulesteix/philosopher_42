@@ -6,7 +6,7 @@
 /*   By: aboulest <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 16:35:07 by aboulest          #+#    #+#             */
-/*   Updated: 2023/04/07 11:21:33 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/04/13 13:11:05 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,16 @@ unsigned int	ft_atoi(const char *str)
 	return (res);
 }
 
-t_table *init_struct(char **argv)
+t_table	*init_struct(char **argv)
 {
 	t_table	*table;
 
 	table = malloc(sizeof(*table));
 	if (!table)
 		return (NULL);
-	if (gettimeofday(&table->tv, NULL) != 0)
-		return (NULL);
+	table->time_start = get_time();	
+	if (table->time_start == -1)
+		return (free(table), NULL);
 	table->nb_philo = ft_atoi(argv[1]);
 	table->die_t = ft_atoi(argv[2]);
 	table->eat_t = ft_atoi(argv[3]);
@@ -70,7 +71,11 @@ t_table *init_struct(char **argv)
 		table->nb_eat_t = ft_atoi(argv[5]);
 	else
 		table->nb_eat_t = -1;
-	table->dead = 0;
+	table->dead = false;
+	table->all_ate = false;
+	table->philo = init_philo(table);
+	if (!(table->philo))
+		return (free(table), NULL);
 	pthread_mutex_init(&table->system_call, NULL);
 	pthread_mutex_init(&table->check_dead, NULL);
 	return (table);
