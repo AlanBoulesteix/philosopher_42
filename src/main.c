@@ -6,7 +6,7 @@
 /*   By: aboulest <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 16:12:18 by aboulest          #+#    #+#             */
-/*   Updated: 2023/04/12 10:32:43 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/04/13 18:34:13 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,8 @@ int	main(int argc, char **argv)
 	table = init_struct(argv);
 	if (!table)
 		return(prog_error(3));
-/*	printf("nb philo: %u\n", table->nb_philo);
-	printf("time_to_die: %u\n", table->die_t);
-	printf("time_to_eat: %u\n", table->eat_t);
-	printf("time_to_sleep: %u\n", table->sleep_t);
-	printf("number of time to eat: %i\n", table->nb_eat_t);*/
 	if(philo(table) == ERROR)
-		return(garbadge_collector(table), prog_error(4));
-	garbadge_collector(table);
+		return (clean_exit(table), prog_error(4));
+	clean_exit(table);
 	return (0);
 }

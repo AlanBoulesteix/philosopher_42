@@ -17,20 +17,20 @@ void	printf_mutex(t_philo *philo, char *str)
 	long			time;
 	long			time_start;
 
-	pthread_mutex_lock(&philo->table->system_call);
+	pthread_mutex_lock(&philo->table->mutex_print);
 	time_start = philo->table->time_start;
 	time = get_time();
 	printf("%ld ",time - time_start);
 	printf("%d", philo->num);
 	printf(" %s", str);
-	pthread_mutex_unlock(&philo->table->system_call);
+	pthread_mutex_unlock(&philo->table->mutex_print);
 }
 
 bool	check_dead(t_philo *philo)
 {
 	int	dead;
-	pthread_mutex_lock(&philo->table->check_dead);
+	pthread_mutex_lock(&philo->table->mutex_check_dead);
 	dead = philo->table->dead;
-	pthread_mutex_unlock(&philo->table->check_dead);
+	pthread_mutex_unlock(&philo->table->mutex_check_dead);
 	return (dead == 1);
 }

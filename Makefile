@@ -6,7 +6,7 @@
 #    By: aboulest <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/16 16:06:10 by aboulest          #+#    #+#              #
-#    Updated: 2023/04/13 11:46:58 by aboulest         ###   ########.fr        #
+#    Updated: 2023/04/13 18:26:42 by aboulest         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,8 @@ NAME		= philo
 FILES		= main.c\
 			  parsing.c\
 			  philo.c\
-			  error.c\
-			  fork_and_philo.c\
+			  exit.c\
+			  initialisation_data.c\
 			  mutex.c\
 			  action.c\
 			  utilities.c
