@@ -6,7 +6,7 @@
 /*   By: aboulest <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 09:18:22 by aboulest          #+#    #+#             */
-/*   Updated: 2023/04/14 12:09:03 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/04/14 17:15:39 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ t_philo	*init_philo(t_table *table)
 		else
 			philo[i].f2 = i + 1;
 		philo[i].num = i + 1;
-		philo[i].dead = false;
 		philo[i].last_meal = -1;
 		philo[i].table = table;
 		pthread_mutex_init(&philo[i].check_meal, NULL);

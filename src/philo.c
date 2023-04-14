@@ -6,7 +6,7 @@
 /*   By: aboulest <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 16:12:26 by aboulest          #+#    #+#             */
-/*   Updated: 2023/04/14 16:47:50 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/04/14 17:52:31 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,16 @@ bool	eating(t_philo *philo, t_table *table)
 	return (1);
 }
 
+void	thinking(t_table *table, t_philo *philo)
+{
+	printf_mutex(philo, "is thinking\n");
+	if ((table->nb_philo % 2) || table->die_t >= 2 * \
+			table->eat_t + table->sleep_t)
+		waiting(table->eat_t - table->sleep_t + 1);
+	else
+		waiting(table->die_t);
+}
+
 void	*thread_routine(void *data)
 {
 	t_philo	*philo;
@@ -59,9 +69,7 @@ void	*thread_routine(void *data)
 			break ;
 		}
 		sleeping(philo);
-		printf_mutex(philo, "is thinking\n");
-		/*if (table->nb_philo % 2 || table->die_t <= table->eat_t + table->sleep_t)
-			waiting(*/
+		thinking(table, philo);
 	}
 	return (NULL);
 }
