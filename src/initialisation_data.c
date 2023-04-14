@@ -6,7 +6,7 @@
 /*   By: aboulest <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 09:18:22 by aboulest          #+#    #+#             */
-/*   Updated: 2023/04/13 19:14:01 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/04/14 12:09:03 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ pthread_mutex_t	*init_fork(t_table *table)
 	pthread_mutex_t	*forks;
 	unsigned int	i;
 
-	forks = malloc(sizeof(pthread_mutex_t)*table->nb_philo);
+	forks = malloc(sizeof(pthread_mutex_t) * table->nb_philo);
 	if (!forks)
 		return (NULL);
 	i = -1;
 	while (++i < table->nb_philo)
 	{
 		if (pthread_mutex_init(&forks[i], NULL) != 0)
-				return(destroy_all_fork(forks, i), NULL);
+			return (destroy_all_fork(forks, i), NULL);
 	}
 	return (forks);
 }
@@ -41,7 +41,7 @@ t_philo	*init_philo(t_table *table)
 	while (++i < table->nb_philo)
 	{
 		philo[i].f1 = i;
-		if ( i == table->nb_philo - 1)
+		if (i == table->nb_philo - 1)
 			philo[i].f2 = 0;
 		else
 			philo[i].f2 = i + 1;
@@ -49,8 +49,9 @@ t_philo	*init_philo(t_table *table)
 		philo[i].dead = false;
 		philo[i].last_meal = -1;
 		philo[i].table = table;
+		pthread_mutex_init(&philo[i].check_meal, NULL);
 	}
-	return(philo);
+	return (philo);
 }
 
 void	init_struct_split(t_table *table, char **argv)
@@ -76,8 +77,8 @@ t_table	*init_struct(char **argv)
 		return (NULL);
 	init_struct_split(table, argv);
 	table->forks = init_fork(table);
-	if(!(table->forks))
-		return(free(table), NULL);
+	if (!(table->forks))
+		return (free(table), NULL);
 	table->philo = init_philo(table);
 	if (!(table->philo))
 		return (free(table->forks), free(table), NULL);
