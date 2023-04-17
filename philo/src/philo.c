@@ -6,7 +6,7 @@
 /*   By: aboulest <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 16:12:26 by aboulest          #+#    #+#             */
-/*   Updated: 2023/04/17 12:41:58 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/04/17 12:43:52 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ bool	eating(t_philo *philo, t_table *table)
 		pthread_mutex_lock(&table->forks[philo->f2]);
 		printf_mutex(philo, "has taken a fork\n");
 		while (!check_dead(philo))
-			usleep(100);
+			usleep(10);
 		pthread_mutex_unlock(&table->forks[philo->f2]);
 		return (0);
 	}
