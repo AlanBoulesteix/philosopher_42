@@ -6,7 +6,7 @@
 /*   By: aboulest <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 09:18:22 by aboulest          #+#    #+#             */
-/*   Updated: 2023/04/14 17:15:39 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/04/17 12:35:31 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ t_table	*init_struct(char **argv)
 	if (!table)
 		return (NULL);
 	init_struct_split(table, argv);
+	if (table->nb_philo == 0)
+		return(free(table), NULL);
 	table->forks = init_fork(table);
 	if (!(table->forks))
 		return (free(table), NULL);
