@@ -6,7 +6,7 @@
 /*   By: aboulest <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 16:13:11 by aboulest          #+#    #+#             */
-/*   Updated: 2023/04/14 16:57:00 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/04/24 13:38:58 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ typedef struct s_philo
 	unsigned int		num;
 	int					f1;
 	int					f2;
-	long long			last_meal;
-	pthread_mutex_t		check_meal;
+	long long			full;
+	long long			t_meal;
 	struct s_table		*table;
 }						t_philo;
 
@@ -41,7 +41,7 @@ typedef struct s_table
 	unsigned int		eat_t;
 	unsigned int		sleep_t;
 	unsigned int		nb_eat_t;
-	int					dead;
+	bool				dead;
 	bool				all_ate;
 	pthread_mutex_t		mutex_print;
 	pthread_mutex_t		mutex_check_dead;
@@ -61,13 +61,16 @@ void				clean_exit(t_table *table);
 
 unsigned int		ft_atoi(const char *str);
 long long			get_time(void);
-void				waiting(unsigned int wait);
+int					waiting(t_table *table, t_philo * philo, unsigned int wait);
+int					all_ate(t_table *table);
 
 void				printf_mutex(t_philo *philo, char *str);
-void				sleeping(t_philo *philo);
-int					eating_odd(t_philo *philo, t_table *table);
-int					eating_even(t_philo *philo, t_table *table);
-bool				check_dead(t_philo *philo);
-long long			check_last_meal(t_philo *philo);
+int					philo_death(t_table *table, t_philo *philo);
+
+int					thinking(t_table *table, t_philo *philo, int flag);
+int					sleeping(t_table *table, t_philo *philo);
+int					eating(t_table *table, t_philo *philo);
+
+int					check_dead(t_table *table);
 void				philo_death(t_table *table, unsigned int i);
 #endif

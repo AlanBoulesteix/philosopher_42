@@ -6,7 +6,7 @@
 /*   By: aboulest <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 09:59:39 by aboulest          #+#    #+#             */
-/*   Updated: 2023/04/14 12:09:43 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/04/21 11:29:36 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	clean_exit(t_table *table)
 	unsigned int	i;
 
 	i = -1;
-	while (++i < table->nb_philo)
-		pthread_mutex_destroy(&table->philo[i].check_meal);
+	pthread_mutex_destroy(&table->mutex_print);
+	pthread_mutex_destroy(&table->mutex_check_dead);
 	if (table->forks)
 		destroy_all_fork(table->forks, table->nb_philo);
 	if (table->philo)

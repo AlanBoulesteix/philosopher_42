@@ -6,7 +6,7 @@
 /*   By: aboulest <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 09:18:22 by aboulest          #+#    #+#             */
-/*   Updated: 2023/04/17 12:40:30 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/04/21 11:30:27 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,8 @@ t_philo	*init_philo(t_table *table)
 		else
 			philo[i].f2 = i + 1;
 		philo[i].num = i + 1;
-		philo[i].last_meal = -1;
+		philo[i].full = 0;
 		philo[i].table = table;
-		pthread_mutex_init(&philo[i].check_meal, NULL);
 	}
 	return (philo);
 }
@@ -83,7 +82,9 @@ t_table	*init_struct(char **argv)
 	table->philo = init_philo(table);
 	if (!(table->philo))
 		return (free(table->forks), free(table), NULL);
-	pthread_mutex_init(&table->mutex_print, NULL);
-	pthread_mutex_init(&table->mutex_check_dead, NULL);
+	if (pthread_mutex_init(&table->mutex_print, NULL) != 0)
+		return (free(table->philo), free(table->forks), free(table), NULL);
+	if (pthread_mutex_init(&table->mutex_check_dead, NULL) != 0)
+		return (free(table->philo), free(table->forks), free(table), NULL);
 	return (table);
 }
