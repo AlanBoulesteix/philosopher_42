@@ -6,7 +6,7 @@
 /*   By: aboulest <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 12:22:50 by aboulest          #+#    #+#             */
-/*   Updated: 2023/04/24 13:39:51 by aboulest         ###   ########.fr       */
+/*   Updated: 2023/04/25 12:42:32 by aboulest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ long long	get_time(void)
 	return (time);
 }
 
-int	waiting(t_table *table, t_philo *philo, unsigned int wait)
+int	waiting(t_table *table, t_philo *philo, int wait)
 {
 	long long	time;
 	long long	target;
@@ -32,28 +32,11 @@ int	waiting(t_table *table, t_philo *philo, unsigned int wait)
 	target = wait;
 	while (get_time() - time < target)
 	{
-		if (check_dead(table) == 1 || philo_death(table, philo) == 1)
-				return (1);
-/*
-		if (get_time() - table->time_start - philo->t_meal >= table->die_t)
-		{
-				pthread_mutex_lock(&table->mutex_check_dead);	
-				table->dead = true;
-				printf_mutex(philo, "died");
-				pthread_mutex_unlock(&table->mutex_check_dead);	
-			return (1);
-		}
-*/		usleep(1);
+		usleep(1000);
 		if (check_dead(table) == 1)
-				return (1);
-		if (get_time() - table->time_start - philo->t_meal >= table->die_t)
-		{
-				pthread_mutex_lock(&table->mutex_check_dead);	
-				table->dead = true;
-				printf_mutex(philo, "died");
-				pthread_mutex_unlock(&table->mutex_check_dead);	
 			return (1);
-		}
+		if (get_time() - table->time_start - philo->t_meal >= table->die_t)
+			return (philo_death(table, philo));
 	}
 	return (0);
 }
@@ -61,12 +44,13 @@ int	waiting(t_table *table, t_philo *philo, unsigned int wait)
 int	all_ate(t_table *table)
 {
 	unsigned int	i;
+	bool			check;
 
 	i = -1;
-	while (++i < table->nb_philo)
-	{
-		if (table->philo[i].full >= table->nb_eat_t)
-			return (1);
-	}
-	return (0);
+	check = 0;
+	pthread_mutex_lock(&table->mutex_all_ate);
+	if (table->all_ate == table->nb_philo)
+		check = 1;
+	pthread_mutex_unlock(&table->mutex_all_ate);
+	return (check);
 }

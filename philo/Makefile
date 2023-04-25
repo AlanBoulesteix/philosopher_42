@@ -6,7 +6,7 @@
 #    By: aboulest <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/16 16:06:10 by aboulest          #+#    #+#              #
-#    Updated: 2023/04/21 13:24:39 by aboulest         ###   ########.fr        #
+#    Updated: 2023/04/25 16:09:00 by aboulest         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ FILES		= main.c\
 			  initialisation_data.c\
 			  mutex.c\
 			  action.c\
-			  utils.c
+			  utils.c\
+			  eating.c
 
 SRC_DIR		= src/
 
